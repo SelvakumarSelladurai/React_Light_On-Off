@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+function LightBulb() {
+  const [isOn, setIsOn] = useState(false);
+
+  const bulbStyle = {
+    fontSize: 100,
+    color: isOn ? 'yellow' : 'gray',
+    transition: 'color 0.3s ease',
+    filter: isOn ? 'drop-shadow(0 0 20px yellow)' : 'none',
+  };
+
+  return (
+    <div style={{ textAlign: 'center', marginTop: 50 }}>
+      <h1>The light is {isOn ? 'ON' : 'OFF'}</h1>
+      <button onClick={() => setIsOn(!isOn)}>
+        {isOn ? 'Turn OFF' : 'Turn ON'}
+      </button>
+      <div style={{ marginTop: 20 }}>
+        <span role="img" aria-label="light bulb" style={bulbStyle}>
+          💡
+        </span>
+      </div>
+    </div>
+  );
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+root.render(<LightBulb />);
